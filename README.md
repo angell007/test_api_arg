@@ -10,7 +10,7 @@
 1. Clonar el repositorio:
    ```
    git clone https://github.com/angell007/test_api_arg.git
-   cd nombre-del-proyecto
+   cd test_api_arg
    ```
 
 2. Instalar dependencias de PHP:
