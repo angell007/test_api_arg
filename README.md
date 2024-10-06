@@ -9,7 +9,7 @@
 
 1. Clonar el repositorio:
    ```
-   git clone https://url-del-repositorio.git
+   git clone https://github.com/angell007/test_api_arg.git
    cd nombre-del-proyecto
    ```
 
