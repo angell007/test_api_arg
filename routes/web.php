@@ -18,3 +18,9 @@ Route::get('/', function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::get('/readme', function () {
+    $readme = file_get_contents(base_path('README.md'));
+    return view('readme', ['content' => $readme]);
+});

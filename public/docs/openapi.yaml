@@ -1,0 +1,695 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+paths:
+  /api/login:
+    post:
+      summary: 'Iniciar sesión'
+      operationId: iniciarSesin
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+                  user:
+                    id: 1
+                    name: Admin
+                    email: admin@example.com
+                    is_admin: 1
+                properties:
+                  token:
+                    type: string
+                    example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: Admin
+                      email:
+                        type: string
+                        example: admin@example.com
+                      is_admin:
+                        type: integer
+                        example: 1
+      tags:
+        - Autenticación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: string
+                  description: 'El correo electrónico del usuario.'
+                  example: admin@example.com
+                password:
+                  type: string
+                  description: 'La contraseña del usuario.'
+                  example: password
+              required:
+                - user
+                - password
+      security: []
+  /api/me:
+    post:
+      summary: 'Obtener información del usuario autenticado'
+      operationId: obtenerInformacinDelUsuarioAutenticado
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: Admin
+                  email: admin@example.com
+                  is_admin: 1
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: Admin
+                  email:
+                    type: string
+                    example: admin@example.com
+                  is_admin:
+                    type: integer
+                    example: 1
+      tags:
+        - Autenticación
+  /api/renew:
+    get:
+      summary: 'Renovar el token de autenticación y obtener información del usuario'
+      operationId: renovarElTokenDeAutenticacinYObtenerInformacinDelUsuario
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+                  user:
+                    id: 1
+                    name: Admin
+                    email: admin@example.com
+                    is_admin: 1
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  token:
+                    type: string
+                    example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: Admin
+                      email:
+                        type: string
+                        example: admin@example.com
+                      is_admin:
+                        type: integer
+                        example: 1
+      tags:
+        - Autenticación
+  /api/change-password:
+    get:
+      summary: 'Cambiar la contraseña del usuario autenticado'
+      operationId: cambiarLaContraseaDelUsuarioAutenticado
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                properties:
+                  status:
+                    type: string
+                    example: success
+      tags:
+        - Autenticación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                newPassword:
+                  type: string
+                  description: 'La nueva contraseña del usuario.'
+                  example: newPassword123
+              required:
+                - newPassword
+  /api/reservations:
+    get:
+      summary: 'Listar reservaciones'
+      operationId: listarReservaciones
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      space_id: 1
+                      user_id: 1
+                      start_time: '2023-05-01 09:00:00'
+                      end_time: '2023-05-01 11:00:00'
+                      description: 'Reunión de equipo'
+                    -
+                      id: 2
+                      space_id: 2
+                      user_id: 2
+                      start_time: '2023-05-02 14:00:00'
+                      end_time: '2023-05-02 16:00:00'
+                      description: 'Entrevista de trabajo'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        space_id: 1
+                        user_id: 1
+                        start_time: '2023-05-01 09:00:00'
+                        end_time: '2023-05-01 11:00:00'
+                        description: 'Reunión de equipo'
+                      -
+                        id: 2
+                        space_id: 2
+                        user_id: 2
+                        start_time: '2023-05-02 14:00:00'
+                        end_time: '2023-05-02 16:00:00'
+                        description: 'Entrevista de trabajo'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        space_id:
+                          type: integer
+                          example: 1
+                        user_id:
+                          type: integer
+                          example: 1
+                        start_time:
+                          type: string
+                          example: '2023-05-01 09:00:00'
+                        end_time:
+                          type: string
+                          example: '2023-05-01 11:00:00'
+                        description:
+                          type: string
+                          example: 'Reunión de equipo'
+      tags:
+        - Endpoints
+    post:
+      summary: 'Crear una nueva reservación'
+      operationId: crearUnaNuevaReservacin
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 3
+                    space_id: 1
+                    user_id: 1
+                    start_time: '2023-05-03 10:00:00'
+                    end_time: '2023-05-03 12:00:00'
+                    description: 'Presentación de proyecto'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      space_id:
+                        type: integer
+                        example: 1
+                      user_id:
+                        type: integer
+                        example: 1
+                      start_time:
+                        type: string
+                        example: '2023-05-03 10:00:00'
+                      end_time:
+                        type: string
+                        example: '2023-05-03 12:00:00'
+                      description:
+                        type: string
+                        example: 'Presentación de proyecto'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                space_id:
+                  type: integer
+                  description: 'El ID del espacio a reservar.'
+                  example: 1
+                start_time:
+                  type: datetime
+                  description: 'La fecha y hora de inicio de la reservación.'
+                  example: '2023-05-03 10:00:00'
+                end_time:
+                  type: datetime
+                  description: 'La fecha y hora de fin de la reservación.'
+                  example: '2023-05-03 12:00:00'
+                description:
+                  type: string
+                  description: 'La descripción de la reservación.'
+                  example: 'Presentación de proyecto'
+              required:
+                - space_id
+                - start_time
+                - end_time
+  '/api/reservations/{id}':
+    put:
+      summary: 'Actualizar una reservación'
+      operationId: actualizarUnaReservacin
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 3
+                    space_id: 1
+                    user_id: 1
+                    start_time: '2023-05-03 10:00:00'
+                    end_time: '2023-05-03 12:00:00'
+                    description: 'Presentación de proyecto'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      space_id:
+                        type: integer
+                        example: 1
+                      user_id:
+                        type: integer
+                        example: 1
+                      start_time:
+                        type: string
+                        example: '2023-05-03 10:00:00'
+                      end_time:
+                        type: string
+                        example: '2023-05-03 12:00:00'
+                      description:
+                        type: string
+                        example: 'Presentación de proyecto'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                space_id:
+                  type: integer
+                  description: 'El ID del espacio a reservar.'
+                  example: 1
+                start_time:
+                  type: datetime
+                  description: 'La fecha y hora de inicio de la reservación.'
+                  example: '2023-05-03 10:00:00'
+                end_time:
+                  type: datetime
+                  description: 'La fecha y hora de fin de la reservación.'
+                  example: '2023-05-03 12:00:00'
+                description:
+                  type: string
+                  description: 'La descripción de la reservación.'
+                  example: 'Presentación de proyecto'
+              required:
+                - space_id
+                - start_time
+                - end_time
+    delete:
+      summary: 'Eliminar una reservación'
+      operationId: eliminarUnaReservacin
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Reservación eliminada exitosamente'
+                properties:
+                  message:
+                    type: string
+                    example: 'Reservación eliminada exitosamente'
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the reservation.'
+        example: quibusdam
+        required: true
+        schema:
+          type: string
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/spaces:
+    get:
+      summary: 'Listar espacios'
+      operationId: listarEspacios
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      name: 'Sala de Conferencias A'
+                      description: 'Sala grande con capacidad para 50 personas'
+                      capacity: 50
+                    -
+                      id: 2
+                      name: 'Sala de Reuniones B'
+                      description: 'Sala mediana con capacidad para 20 personas'
+                      capacity: 20
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: 'Sala de Conferencias A'
+                        description: 'Sala grande con capacidad para 50 personas'
+                        capacity: 50
+                      -
+                        id: 2
+                        name: 'Sala de Reuniones B'
+                        description: 'Sala mediana con capacidad para 20 personas'
+                        capacity: 20
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: 'Sala de Conferencias A'
+                        description:
+                          type: string
+                          example: 'Sala grande con capacidad para 50 personas'
+                        capacity:
+                          type: integer
+                          example: 50
+      tags:
+        - Espacios
+    post:
+      summary: 'Crear un nuevo espacio'
+      operationId: crearUnNuevoEspacio
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 3
+                    name: 'Sala de Juntas C'
+                    description: 'Sala pequeña para reuniones ejecutivas'
+                    capacity: 10
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      name:
+                        type: string
+                        example: 'Sala de Juntas C'
+                      description:
+                        type: string
+                        example: 'Sala pequeña para reuniones ejecutivas'
+                      capacity:
+                        type: integer
+                        example: 10
+      tags:
+        - Espacios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'El nombre del espacio.'
+                  example: 'Sala de Juntas C'
+                description:
+                  type: string
+                  description: 'La descripción del espacio.'
+                  example: 'Sala pequeña para reuniones ejecutivas'
+                capacity:
+                  type: integer
+                  description: 'La capacidad del espacio.'
+                  example: 10
+              required:
+                - name
+                - description
+                - capacity
+  '/api/spaces/{id}':
+    get:
+      summary: 'Obtener detalles de un espacio'
+      operationId: obtenerDetallesDeUnEspacio
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 1
+                    name: 'Sala de Conferencias A'
+                    description: 'Sala grande con capacidad para 50 personas'
+                    capacity: 50
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Sala de Conferencias A'
+                      description:
+                        type: string
+                        example: 'Sala grande con capacidad para 50 personas'
+                      capacity:
+                        type: integer
+                        example: 50
+      tags:
+        - Espacios
+    put:
+      summary: 'Actualizar un espacio existente'
+      operationId: actualizarUnEspacioExistente
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 3
+                    name: 'Sala de Juntas C'
+                    description: 'Sala pequeña para reuniones ejecutivas'
+                    capacity: 10
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      name:
+                        type: string
+                        example: 'Sala de Juntas C'
+                      description:
+                        type: string
+                        example: 'Sala pequeña para reuniones ejecutivas'
+                      capacity:
+                        type: integer
+                        example: 10
+      tags:
+        - Espacios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'El nombre del espacio.'
+                  example: 'Sala de Juntas C'
+                description:
+                  type: string
+                  description: 'La descripción del espacio.'
+                  example: 'Sala pequeña para reuniones ejecutivas'
+                capacity:
+                  type: integer
+                  description: 'La capacidad del espacio.'
+                  example: 10
+              required:
+                - name
+                - description
+                - capacity
+    delete:
+      summary: 'Eliminar un espacio'
+      operationId: eliminarUnEspacio
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Espacio eliminado exitosamente'
+                properties:
+                  message:
+                    type: string
+                    example: 'Espacio eliminado exitosamente'
+      tags:
+        - Espacios
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'El ID del espacio a actualizar.'
+        example: 3
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Autenticación
+    description: "\nEndpoints para manejar la autenticación de usuarios"
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: Espacios
+    description: "\nEndpoints para manejar los espacios"

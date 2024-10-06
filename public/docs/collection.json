@@ -1,0 +1,613 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost:8000"
+        }
+    ],
+    "info": {
+        "name": "Laravel",
+        "_postman_id": "3af0ef90-b459-407d-a94c-3eb828a0a220",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Autenticaci\u00f3n",
+            "description": "\nEndpoints para manejar la autenticaci\u00f3n de usuarios",
+            "item": [
+                {
+                    "name": "Iniciar sesi\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"user\":\"admin@example.com\",\"password\":\"password\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...\",\n \"user\": {\n   \"id\": 1,\n   \"name\": \"Admin\",\n   \"email\": \"admin@example.com\",\n   \"is_admin\": 1\n }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Obtener informaci\u00f3n del usuario autenticado",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/me",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/me"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"id\": 1,\n \"name\": \"Admin\",\n \"email\": \"admin@example.com\",\n \"is_admin\": 1\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Renovar el token de autenticaci\u00f3n y obtener informaci\u00f3n del usuario",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/renew",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/renew"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"status\": \"success\",\n \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...\",\n \"user\": {\n   \"id\": 1,\n   \"name\": \"Admin\",\n   \"email\": \"admin@example.com\",\n   \"is_admin\": 1\n }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Cambiar la contrase\u00f1a del usuario autenticado",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/change-password",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/change-password"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"newPassword\":\"newPassword123\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"status\": \"success\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "Listar reservaciones",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/reservations",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/reservations"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"data\": [\n   {\n     \"id\": 1,\n     \"space_id\": 1,\n     \"user_id\": 1,\n     \"start_time\": \"2023-05-01 09:00:00\",\n     \"end_time\": \"2023-05-01 11:00:00\",\n     \"description\": \"Reuni\u00f3n de equipo\"\n   },\n   {\n     \"id\": 2,\n     \"space_id\": 2,\n     \"user_id\": 2,\n     \"start_time\": \"2023-05-02 14:00:00\",\n     \"end_time\": \"2023-05-02 16:00:00\",\n     \"description\": \"Entrevista de trabajo\"\n   }\n ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Crear una nueva reservaci\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/reservations",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/reservations"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"space_id\":1,\"start_time\":\"2023-05-03 10:00:00\",\"end_time\":\"2023-05-03 12:00:00\",\"description\":\"Presentaci\u00f3n de proyecto\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"data\": {\n   \"id\": 3,\n   \"space_id\": 1,\n   \"user_id\": 1,\n   \"start_time\": \"2023-05-03 10:00:00\",\n   \"end_time\": \"2023-05-03 12:00:00\",\n   \"description\": \"Presentaci\u00f3n de proyecto\"\n }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Actualizar una reservaci\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/reservations\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/reservations\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "quibusdam",
+                                    "description": "The ID of the reservation."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"space_id\":1,\"start_time\":\"2023-05-03 10:00:00\",\"end_time\":\"2023-05-03 12:00:00\",\"description\":\"Presentaci\u00f3n de proyecto\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"data\": {\n   \"id\": 3,\n   \"space_id\": 1,\n   \"user_id\": 1,\n   \"start_time\": \"2023-05-03 10:00:00\",\n   \"end_time\": \"2023-05-03 12:00:00\",\n   \"description\": \"Presentaci\u00f3n de proyecto\"\n }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Eliminar una reservaci\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/reservations\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/reservations\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "asperiores",
+                                    "description": "The ID of the reservation."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"message\": \"Reservaci\u00f3n eliminada exitosamente\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Espacios",
+            "description": "\nEndpoints para manejar los espacios",
+            "item": [
+                {
+                    "name": "Listar espacios",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/spaces",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/spaces"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"data\": [\n   {\n     \"id\": 1,\n     \"name\": \"Sala de Conferencias A\",\n     \"description\": \"Sala grande con capacidad para 50 personas\",\n     \"capacity\": 50\n   },\n   {\n     \"id\": 2,\n     \"name\": \"Sala de Reuniones B\",\n     \"description\": \"Sala mediana con capacidad para 20 personas\",\n     \"capacity\": 20\n   }\n ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Crear un nuevo espacio",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/spaces",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/spaces"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Sala de Juntas C\",\"description\":\"Sala peque\u00f1a para reuniones ejecutivas\",\"capacity\":10}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"data\": {\n   \"id\": 3,\n   \"name\": \"Sala de Juntas C\",\n   \"description\": \"Sala peque\u00f1a para reuniones ejecutivas\",\n   \"capacity\": 10\n }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Obtener detalles de un espacio",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/spaces\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/spaces\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "3",
+                                    "description": "El ID del espacio a actualizar."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"data\": {\n   \"id\": 1,\n   \"name\": \"Sala de Conferencias A\",\n   \"description\": \"Sala grande con capacidad para 50 personas\",\n   \"capacity\": 50\n }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Actualizar un espacio existente",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/spaces\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/spaces\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "3",
+                                    "description": "El ID del espacio a actualizar."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Sala de Juntas C\",\"description\":\"Sala peque\u00f1a para reuniones ejecutivas\",\"capacity\":10}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"data\": {\n   \"id\": 3,\n   \"name\": \"Sala de Juntas C\",\n   \"description\": \"Sala peque\u00f1a para reuniones ejecutivas\",\n   \"capacity\": 10\n }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Eliminar un espacio",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/spaces\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/spaces\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "3",
+                                    "description": "El ID del espacio a actualizar."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"message\": \"Espacio eliminado exitosamente\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}
